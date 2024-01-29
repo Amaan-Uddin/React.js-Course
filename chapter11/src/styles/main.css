@@ -1,0 +1,37 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.box {
+	max-width: 50rem;
+}
+
+.checkbox,
+.trash {
+	width: 2rem;
+	height: 2rem;
+}
+
+.plus {
+	width: 1.75rem;
+	height: 1.75rem;
+}
+
+.section {
+	max-height: 15rem;
+	overflow: auto;
+}
