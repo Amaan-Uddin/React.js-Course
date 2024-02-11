@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 import Layout from './components/Layout/Layout';
 import Home from './components/Body/Home';
 import About from './components/Body/About';
@@ -40,7 +41,26 @@ function App() {
 	const [postTitle, setPostTitle] = useState('');
 	const [postBody, setPostBody] = useState('');
 
-	const handleSubmit = (e) => {};
+	useEffect(() => {
+		const filteredPost = posts.filter(
+			(post) =>
+				post.body.toLowerCase().includes(search.toLowerCase()) ||
+				post.title.toLowerCase().includes(search.toLowerCase())
+		);
+		setSearchResult(filteredPost.reverse());
+	}, [posts, search]);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+		const date = format(new Date(), 'MMMM dd, yyyy pp');
+		const newPost = { id: id, datetime: date, title: postTitle, body: postBody };
+		setPosts([...posts, newPost]);
+		setPostTitle('');
+		setPostBody('');
+		navigate('/');
+	};
+
 	const handleDelete = (id) => {
 		const filteredPosts = posts.filter((post) => post.id != id);
 		setPosts(filteredPosts);
@@ -51,7 +71,7 @@ function App() {
 		<>
 			<Routes>
 				<Route path="/" element={<Layout search={search} setSearch={setSearch} />}>
-					<Route index element={<Home posts={posts} />} />
+					<Route index element={<Home posts={searchResult} />} />
 					<Route path="post">
 						<Route
 							index
