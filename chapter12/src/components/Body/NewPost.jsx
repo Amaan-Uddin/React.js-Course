@@ -12,8 +12,9 @@ const NewPost = ({ postTitle, postBody, handleSubmit, setPostTitle, setPostBody 
 					onChange={(e) => {
 						setPostTitle(e.target.value);
 					}}
+					autoComplete="off"
 				/>
-				<label htmlFor="floatingInput">Enter title...</label>
+				<label htmlFor="floatingInput">Enter title</label>
 			</div>
 			<div className="form-floating">
 				<textarea
@@ -27,7 +28,7 @@ const NewPost = ({ postTitle, postBody, handleSubmit, setPostTitle, setPostBody 
 						setPostBody(e.target.value);
 					}}
 				/>
-				<label htmlFor="floatingTextarea2">Write content for post...</label>
+				<label htmlFor="floatingTextarea2">Write content for post</label>
 			</div>
 			<button className="btn btn-primary w-100" type="submit">
 				Submit
